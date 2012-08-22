@@ -50,6 +50,14 @@ topic_attrs = {
 client.create('PushTopic', topic_attrs)
 
 ```
+
+
+Possible Uses
+-------
+
+* A message queue backed in Databasedotcom
+* A service that pre caches data from Force.com into a local db or datastore
+* Push Notifications (Desktop, Mobile)
   
 ## Resources
 * [OAuth 2.0 Web Server Authentication Flow](http://na12.salesforce.com/help/doc/en/remoteaccess_oauth_web_server_flow.htm)
