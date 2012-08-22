@@ -5,9 +5,9 @@ This gem is an extension of the [databasedotcom](https://rubygems.org/gems/datab
 
 Notes
 -------
-*The only prerequisites for using the gem are to have it present in your system and to require it in your project.  If you are already using the databasedotcom gem, this gem will integrate seamlessly with what you are already using.
-*This gem currently relies on [eventmachine](https://rubygems.org/gems/eventmachine) to run, so you're streaming code must be run from within an EventMachine block. If you are using an event based server like Thin, then you are all set.
-*If you are using OAuth, be sure to include a refresh token when authenticating ... otherwise the stream will stop working when the access token expires.
+* The only prerequisites for using the gem are to have it present in your system and to require it in your project.  If you are already using the databasedotcom gem, this gem will integrate seamlessly with what you are already using.
+* This gem currently relies on [eventmachine](https://rubygems.org/gems/eventmachine) to run, so you're streaming code must be run from within an EventMachine block. If you are using an event based server like Thin, then you are all set.
+* If you are using OAuth, be sure to include a refresh token when authenticating ... otherwise the stream will stop working when the access token expires.
 
 Usage
 -------
