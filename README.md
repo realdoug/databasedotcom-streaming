@@ -25,7 +25,7 @@ client.authenticate(:token => my-access-token, :instance_url => my-instance-url,
 
 ```ruby
 EM.run{
-  client.subscribe_to_push_topic('AllLeads'){ |message| puts message.inspect }
+  client.subscribe_to_push_topic('MyStreamingTopic'){ |message| puts message.inspect }
 }
 ```
 
