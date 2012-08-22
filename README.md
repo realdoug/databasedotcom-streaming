@@ -11,6 +11,9 @@ Notes
 
 Usage
 -------
+
+Use the 'subscribe_to_push_topic' method to listen to a streaming channel and pass a topic name and callback as arguments.  Whenever the stream has new information to publish, it will call your callback and pass it an argument representing the new message in the form of a hash.
+
 ### Setup
 
 ```ruby
