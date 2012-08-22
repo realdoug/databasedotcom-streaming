@@ -1,16 +1,6 @@
 What is databasedotcom-streaming?
 ------------------------------
-This gem is an extension of the [databasedotcom](https://rubygems.org/gems/databasedotcom) gem that makes it simple and convenient to consume the [salesforce.com](http://salesforce.com/) Streaming API in Ruby
-
-How does it work?
----------------------------------------------------------------
-Using the gem is simple:
-
-### Sinatra
-
-**<a href="https://db-oauth2-sinatra-basic.herokuapp.com" target="_blank">Simple example</a>**&nbsp;&nbsp;<a href="https://github.com/richardvanhook/databasedotcom-oauth2-sinatra-basic" target="_blank">(view source on github)</a>
-
-**<a href="https://db-oauth2-sinatra-jqm.herokuapp.com" target="_blank">Advanced configuration with a JQuery Mobile front-end</a>**&nbsp;&nbsp;<a href="https://github.com/richardvanhook/databasedotcom-oauth2-sinatra-jqm" target="_blank">(view source on github)</a>
+**This gem is an extension of the [databasedotcom](https://rubygems.org/gems/databasedotcom) gem that makes it simple and convenient to consume the [salesforce.com](http://salesforce.com/) Streaming API in Ruby
 
 Usage
 -------
@@ -18,10 +8,10 @@ Usage
 ### Minimal 
 
 ```ruby
-require "databasedotcom-oauth2"
-use Databasedotcom::OAuth2::WebServerFlow, 
-  :token_encryption_key => "replace me",
-  :endpoints => {"login.salesforce.com" => {:key => "replace me", :secret => "replace me"}}
+require "databasedotcom-streaming"
+client = Databasedotcom::Client.new
+client.authenticate(:token => my-access-token, :instance_url => my-instance-url, :refresh_token => my-refresh-token) 
+
 ```
 
 Insert above code wherever your [Rack](http://rack.github.com/) Stack is defined.  See [Required Configuration Parameters](#required-configuration-parameters) for more information on parameters.
