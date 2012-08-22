@@ -11,7 +11,7 @@ Notes
 
 Usage
 -------
-### Basic example
+### Setup
 
 ```ruby
 require "databasedotcom-streaming"
@@ -19,49 +19,36 @@ require "databasedotcom-streaming"
 client = Databasedotcom::Client.new
 client.authenticate(:token => my-access-token, :instance_url => my-instance-url, :refresh_token => my-refresh-token)  
 
-client.materialize 'PushTopic'
-all_push_topics = PushTopic.all
-puts all_push_topics.to_yaml
+```
 
+### Subscribe
+
+```ruby
 EM.run{
   client.subscribe_to_push_topic('AllLeads'){ |message| puts message.inspect }
 }
 ```
 
-### Rails
+### See your push topics
 
 ```ruby
-# Gemfile
 
-gem 'databasedotcom-streaming' # databasedotcom is implicitly required, so you get the full featureset of databasedotcom functionality
+client.materialize 'PushTopic'
+all_push_topics = PushTopic.all
+puts all_push_topics.to_yaml
 
 ```
 
+### Create a new topic
+
 ```ruby
-# lib/my_background_process.rb
-require 'databasedotcom-streaming'
+topic_attrs = {
+  :query => 'SELECT Id, Name FROM Lead WHERE Source = \'Web\'' # All inbound leads that come from the web 
+  :name  => 'WebLeads'
+}
 
-modlue WorkerProcess
-  def self.respond_to_sfdc_event
-    client = Databasedotcom::Client.new
-    client.authenticate(:token => my-access-token, :instance_url => my-instance-url, :refresh_token => my-refresh-token) 
-    client.subscribe_to_push_topic('AllLeads') do |message| 
-      # process this message in the background without blocking requests
-    end
-  end
-end
+client.create('PushTopic', topic_attrs)
 
-```
-
-
-
-### Sinatra
-```ruby
-use Databasedotcom::OAuth2::WebServerFlow, 
-  :display   => "touch"        , #default is "page"
-  :immediate => true           , #default is false
-  :prompt    => "login consent", #default is nil
-  :scope     => "full"           #default is "id api refresh_token"
 ```
   
 ## Resources
