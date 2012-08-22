@@ -22,9 +22,7 @@ EM.run{
 }
 ```
 
-Insert above code wherever your [Rack](http://rack.github.com/) Stack is defined.  See [Required Configuration Parameters](#required-configuration-parameters) for more information on parameters.
-
-### Multiple Endpoints 
+### Rails
 
 ```ruby
 use Databasedotcom::OAuth2::WebServerFlow, 
@@ -32,7 +30,7 @@ use Databasedotcom::OAuth2::WebServerFlow,
                  "test.salesforce.com"  => {:key => "replace me", :secret => "replace me"}}
 ```
 
-### Authentication
+### Sinatra
 ```ruby
 use Databasedotcom::OAuth2::WebServerFlow, 
   :display   => "touch"        , #default is "page"
