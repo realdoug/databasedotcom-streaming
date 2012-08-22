@@ -1,26 +1,12 @@
-What is databasedotcom-oauth2?
+What is databasedotcom-streaming?
 ------------------------------
-* an extension of the [databasedotcom](https://rubygems.org/gems/databasedotcom) gem that simplifies authentication and authorization with [salesforce.com](http://salesforce.com/) for Ruby web apps via OAuth 2.0
-* a Ruby gem intended to run as Rack Middleware
-* an alternative to using [OmniAuth](http://www.omniauth.org/) and the corresponding [omniauth-salesforce](https://rubygems.org/gems/omniauth-salesforce) gem.
+This gem is an extension of the [databasedotcom](https://rubygems.org/gems/databasedotcom) gem that makes it simple and convenient to consume the [salesforce.com](http://salesforce.com/) Streaming API in Ruby
 
-When and why should I use it instead of OmniAuth?
+How does it work?
 ---------------------------------------------------------------
-Many Ruby web apps integrated with [salesforce.com](http://salesforce.com/) need more than just identification, they also need to _interact_ with [salesforce.com](http://salesforce.com/) via the [databasedotcom](https://rubygems.org/gems/databasedotcom) gem.  Both OmniAuth and databasedotcom-oauth2 provide identification; however, databasedotcom-oauth2 makes the interaction part easier. 
+Using the gem is simple:
 
-Specifically, databasedotcom-oauth2:
-
-* allows multiple saleforce.com endpoints (production, sandbox, etc.)
-* supports configuration of scope, display, and immediate OAuth 2.0 parameters
-* supports My Domain
-* maintains an encrypted OAuth 2.0 token in whatever session store you choose (Cookie, Pool, etc)
-* materializes a [databasedotcom](https://rubygems.org/gems/databasedotcom) client upon each request (using the token in session)
-* provides a mixin for your app containing utility methods like unauthenticated?, client, etc.
-
-Demos
--------
-
-### Using Sinatra
+### Sinatra
 
 **<a href="https://db-oauth2-sinatra-basic.herokuapp.com" target="_blank">Simple example</a>**&nbsp;&nbsp;<a href="https://github.com/richardvanhook/databasedotcom-oauth2-sinatra-basic" target="_blank">(view source on github)</a>
 
