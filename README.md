@@ -1,17 +1,21 @@
 What is databasedotcom-streaming?
 ------------------------------
 
-* an extension of the [databasedotcom](https://rubygems.org/gems/databasedotcom) gem that makes it simple and convenient to consume the [salesforce.com](http://salesforce.com/) Streaming API in Ruby
+This gem is an extension of the [databasedotcom](https://rubygems.org/gems/databasedotcom) gem that makes it simple and convenient to consume the [salesforce.com](http://salesforce.com/) Streaming API in Ruby.  It relies on the excellent [Faye](faye.jcoglan.com) to subscribe to Salesforce's streaming servers and execute evented callbacks without introducing blocks in your code.
 
 Usage
 -------
+NOTE: The only prerequisites for using the gem are to have it present in your system and to require it in your project.  If you are already using the databasedotcom gem, this gem will integrate seamlessly with what you are already using.
+OTHER NOTE: This gem currently relies on [eventmachine](https://rubygems.org/gems/eventmachine) to run, so you're streaming code must be run from within an EventMachine block. If you are using an event based server like Thin, then you are all set.
+ALSO: If you are using OAuth, be sure to include a refresh token when authenticating ... otherwise the stream will stop working when the access token expires.
 
-### Minimal 
+### Basic example
 
 ```ruby
 require "databasedotcom-streaming"
 client = Databasedotcom::Client.new
 client.authenticate(:token => my-access-token, :instance_url => my-instance-url, :refresh_token => my-refresh-token) 
+client.subscribe_to_push_topic('AllLeads'){ |message| puts message.inspect }
 
 ```
 
