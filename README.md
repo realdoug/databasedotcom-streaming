@@ -32,6 +32,18 @@ EM.run{
 }
 ```
 
+or 
+
+```ruby
+EM.run{
+  client.subscribe_to_push_topic('MyStreamingTopic') do |message|
+    # my block of code
+    # goes here
+    # and here
+  end
+}
+```
+
 ### See your push topics
 
 ```ruby
