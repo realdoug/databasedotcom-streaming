@@ -15,9 +15,15 @@ Usage
 
 ```ruby
 require "databasedotcom-streaming"
+
+client = Databasedotcom::Client.new
+client.authenticate(:token => my-access-token, :instance_url => my-instance-url, :refresh_token => my-refresh-token)  
+
+client.materialize 'PushTopic'
+all_push_topics = PushTopic.all
+puts all_push_topics.to_yaml
+
 EM.run{
-  client = Databasedotcom::Client.new
-  client.authenticate(:token => my-access-token, :instance_url => my-instance-url, :refresh_token => my-refresh-token) 
   client.subscribe_to_push_topic('AllLeads'){ |message| puts message.inspect }
 }
 ```
@@ -25,10 +31,29 @@ EM.run{
 ### Rails
 
 ```ruby
-use Databasedotcom::OAuth2::WebServerFlow, 
-  :endpoints => {"login.salesforce.com" => {:key => "replace me", :secret => "replace me"},
-                 "test.salesforce.com"  => {:key => "replace me", :secret => "replace me"}}
+# Gemfile
+
+gem 'databasedotcom-streaming' # databasedotcom is implicitly required, so you get the full featureset of databasedotcom functionality
+
 ```
+
+```ruby
+# lib/my_background_process.rb
+require 'databasedotcom-streaming'
+
+modlue WorkerProcess
+  def self.respond_to_sfdc_event
+    client = Databasedotcom::Client.new
+    client.authenticate(:token => my-access-token, :instance_url => my-instance-url, :refresh_token => my-refresh-token) 
+    client.subscribe_to_push_topic('AllLeads') do |message| 
+      # process this message in the background without blocking requests
+    end
+  end
+end
+
+```
+
+
 
 ### Sinatra
 ```ruby
