@@ -15,10 +15,11 @@ Usage
 
 ```ruby
 require "databasedotcom-streaming"
-client = Databasedotcom::Client.new
-client.authenticate(:token => my-access-token, :instance_url => my-instance-url, :refresh_token => my-refresh-token) 
-client.subscribe_to_push_topic('AllLeads'){ |message| puts message.inspect }
-
+EM.run{
+  client = Databasedotcom::Client.new
+  client.authenticate(:token => my-access-token, :instance_url => my-instance-url, :refresh_token => my-refresh-token) 
+  client.subscribe_to_push_topic('AllLeads'){ |message| puts message.inspect }
+}
 ```
 
 Insert above code wherever your [Rack](http://rack.github.com/) Stack is defined.  See [Required Configuration Parameters](#required-configuration-parameters) for more information on parameters.
