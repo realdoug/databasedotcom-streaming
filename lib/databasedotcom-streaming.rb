@@ -10,7 +10,7 @@ module Databasedotcom
 			puts 'connecting to '+self.instance_url+'/cometd/25.0'
 			faye.bind 'transport:down' do
 					puts 'trying to refresh token'
-		      puts list_sobjects # to refresh the access token
+		      list_sobjects # to refresh the access token
 		      faye.set_header 'Authorization', "OAuth #{self.oauth_token}"
 		    end
 			faye.subscribe('/topic/'+push_topic_name){ |message| callback.call(message) }
