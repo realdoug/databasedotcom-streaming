@@ -14,7 +14,12 @@ module Databasedotcom
         list_sobjects # to refresh the access token
         faye.set_header 'Authorization', "OAuth #{self.oauth_token}"
       end
-      faye.subscribe('/topic/'+push_topic_name){ |message| callback.call(message) }
+      if push_topic_name.kind_of?(Array)
+        push_topic_name.map!{|push_topic| '/topic/'+ push_topic}
+      else
+        push_topic_name = '/topic/' + push_topic_name
+      end
+      faye.subscribe(push_topic_name){ |message| callback.call(message) }
     end
   end
 end
